@@ -1,5 +1,7 @@
 module.exports.home = function(req,res){
-    return res.end('<h1>Here we set up controller </h1>');
+    return res.render('home',{
+        title: "Vibranet title"
+    });
 }
 
 // module.exports.actionName = function(){  };
