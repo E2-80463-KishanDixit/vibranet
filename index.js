@@ -9,6 +9,9 @@ app.use(expressLayout);
 // use express router 
 app.use('/',require('./routes'));
 
+//adding static files 
+app.use(express.static('./assets'));
+
 // setting up the view engine
 app.set('view engine','ejs');
 app.set('views','./views');
