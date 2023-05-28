@@ -6,6 +6,10 @@ port = 8000;
 // using layouts
 app.use(expressLayout);
 
+// extracts css and js from the layout 
+app.set('layout extractStyles',true);
+app.set('layout extractScripts',true);
+
 // use express router 
 app.use('/',require('./routes'));
 
