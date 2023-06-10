@@ -1,7 +1,14 @@
 const express = require('express');
+const cookieParser = require('cookie-parser'); // To use cookie 
 const app = express();
 const expressLayout = require('express-ejs-layouts');
 port = 8000;
+
+// to read form data
+app.use(express.urlencoded());
+
+// to use cookie
+app.use(cookieParser());
 
 // adding monggose 
 const db = require('./config/mongoose');
