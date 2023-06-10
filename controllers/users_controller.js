@@ -22,3 +22,12 @@ module.exports.signIn = function(req,res){
      });
  }
 
+//get the form deta 
+module.exports.create = function(req,res){
+     // will do it
+}
+
+// to create session for the user 
+module.exports.createSession = function(req,res){
+     // TODo latter
+}
