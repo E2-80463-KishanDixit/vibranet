@@ -4,8 +4,12 @@ const app = express();
 const expressLayout = require('express-ejs-layouts');
 port = 8000;
 
-// to read form data
-app.use(express.urlencoded());
+// // to read form data
+// app.use(express.urlencoded());
+
+// parse application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: false }));
+
 
 // to use cookie
 app.use(cookieParser());
