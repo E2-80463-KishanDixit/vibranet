@@ -10,6 +10,10 @@ module.exports.profile = function(req,res){
 
 //rendering sign up page
 module.exports.signUp = function(req,res){
+     // if  user is already singed up then it will redirect to profile page
+     if(req.isAuthenticated()){
+          return res.redirect('/users/profile');
+     }
 
      return res.render('user_sign_up',{
          title:"Vibranet | Sign UP "
@@ -18,7 +22,11 @@ module.exports.signUp = function(req,res){
 
 // rendering sign in paage
 module.exports.signIn = function(req,res){
-    
+    // if  user is already singed in then it will redirect to profile page
+     if(req.isAuthenticated()){
+          return res.redirect('/users/profile');
+     }
+
      return res.render('user_sign_in',{
          title:"Vibranet | Sign In"
      });
