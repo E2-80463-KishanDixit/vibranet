@@ -3,14 +3,15 @@ const passport = require('passport');
 const LocalStrategy  = require('passport-local').Strategy;
 
 const User = require('../models/user');
-// authentication using passport
+
+// // authentication using passport
 passport.use(new LocalStrategy({
-    usernameField:email             // we going this email as username and it is unique
+    usernameField:'email'            // we going this email as username and it is unique
 },
     // call back function
 function(email,password,done){      // here "done" is a function which telss that auth is done or not it may take two arguments
     // find a user and will established an identity
-    User.findOne({email:email},function(err,user){                // email(schema Vlaue) : email(Passed value)
+    User.findOne({email:email},function (err,user){                // email(schema Vlaue) : email(Passed value)
         if(err){
             console.log("Error in finding user -----> passport");
             return done(err);                                     // this will report error
@@ -25,15 +26,17 @@ function(email,password,done){      // here "done" is a function which telss tha
 }
 ));
 
+
 //serialzing the key it means which key going to set up as a encrypted key for the cookie
 
-passport.serializeUser(function(user,done){
+passport.serializeUser( function(user,done){
     done(null,user.id);
-})
+});
 
 //deserializing the user form the key  in the cookies
 
-passport.deserializeUser(function(id,user){
+passport.deserializeUser(function(id,done){
+
     User.findById(id,function(err,user){
         if(err){
             console.log("Error in finding user -----> passport");
@@ -42,6 +45,9 @@ passport.deserializeUser(function(id,user){
 
         return done(null,user);
     })
+
 })
+
+
 
 module.exports = passport;

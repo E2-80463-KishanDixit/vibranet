@@ -3,7 +3,7 @@ const User = require('../models/user');
 module.exports.profile = function(req,res){
      // res.end('<h1>User Profile</h1>');
 
-     res.render('users',{
+     return res.render('users_pro',{
           title: 'Users Profile'
      })
 }
@@ -38,7 +38,7 @@ module.exports.create =async function(req,res){
                     await User.create(req.body);
                     return res.redirect('/users/sign-in');
                }catch(err){
-                    console.log("Error in creating the user");
+                    console.log("Error in creating the user"); 
                     return;
                }
           }else{
@@ -52,5 +52,5 @@ module.exports.create =async function(req,res){
 
 // to create session for the user 
 module.exports.createSession = function(req,res){
-     // TODo latter
-}
+     return res.redirect('/');
+} 
