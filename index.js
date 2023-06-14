@@ -60,22 +60,6 @@ app.use(session({
     )
 }));
 
-// app.use(
-//     session({
-//       name: 'vibranet',
-//       secret: 'secret_key',
-//       saveUninitialized: false,
-//       resave: false,
-//       cookie: {
-//         maxAge: 1000 * 60 * 60 * 24, // 1 day
-//       },
-//       store: new MongoStore({
-//         mongooseConnection: db,
-//         autoRemove: 'native',
-//       }),
-//     })
-//   );
-
 app.use(passport.initialize());
 app.use(passport.session());
 
