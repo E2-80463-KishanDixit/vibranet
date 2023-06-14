@@ -9,7 +9,7 @@ const db = require('./config/mongoose');
 const session = require('express-session');
 const passport = require("passport");
 const passportLocal = require('./config/passport-local-strategy')
-
+const MongoStore = require('connect-mongodb-session')(session);
 
 // // to read form data
 // app.use(express.urlencoded());
@@ -38,7 +38,8 @@ app.set('layout extractScripts',true);
 app.set('view engine','ejs');
 app.set('views','./views');
 
-// set the session 
+//set the session 
+//Mongo store is used to store session cookie in the db
 app.use(session({
     name:'vibranet',
     // TODO change the secret key before deployment in production mode
@@ -47,8 +48,33 @@ app.use(session({
     resave:false,                // do not want to save data again and again
     cookie:{
         maxAge: (1000 *60 *100)
-    }
+    },
+    store: new MongoStore(
+        {
+            mongooseConnection: db,
+            autoRemove:'disabled'
+        },
+        function(err){
+            console.log(err || 'connect mongodb setup ok');
+        }
+    )
 }));
+
+// app.use(
+//     session({
+//       name: 'vibranet',
+//       secret: 'secret_key',
+//       saveUninitialized: false,
+//       resave: false,
+//       cookie: {
+//         maxAge: 1000 * 60 * 60 * 24, // 1 day
+//       },
+//       store: new MongoStore({
+//         mongooseConnection: db,
+//         autoRemove: 'native',
+//       }),
+//     })
+//   );
 
 app.use(passport.initialize());
 app.use(passport.session());
