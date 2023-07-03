@@ -1,0 +1,24 @@
+header {
+  background-color: #e995e9;
+  color: white; }
+  header ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center; }
+    header ul #app-logo {
+      margin: 0.5rem;
+      padding: 0.4rem;
+      font-size: 2.5rem;
+      font-weight: 600;
+      font-family: "Fasthand", 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; }
+    header ul div {
+      width: 16%;
+      display: flex;
+      justify-content: space-around;
+      list-style: none;
+      font-size: 1.5rem; }
+      header ul div a {
+        text-decoration: none;
+        color: white;
+        font-weight: 600; }
