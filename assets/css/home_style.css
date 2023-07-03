@@ -1,2 +1,4 @@
 body {
   background-color: whitesmoke; }
+  body form textarea {
+    resize: none; }
