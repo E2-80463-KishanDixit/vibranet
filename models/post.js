@@ -8,7 +8,7 @@ const postSchema = new mongoose.Schema({
     },
     user:{
         type: mongoose.Schema.Types.ObjectId,        // user object id
-        ref: 'user'                                 // Refer to which schema  
+        ref: 'User'                                 // Refer to which schema  
     }
 },{
     timestamps:true                // it will add "created at and updated add" field in the database
