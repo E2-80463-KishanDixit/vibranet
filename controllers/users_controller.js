@@ -71,19 +71,20 @@ module.exports.create =async function(req,res){
      }
 }
 
-// to create session for the user 
-module.exports.createSession = function(req,res){
-     req.flash('success','Logged in Successfully');
-     return res.redirect('/');
-} 
 
-module.exports.destroySession = function(req,res,next){
-     // before redirecting to home page user should log out
-     req.logout(function(err){
-          if(err){
-               return next(err);
-          }
-          req.flash('success','You have Logged out');
-          return res.redirect('/')
-     });
-}
+ // to create session for the user 
+     module.exports.createSession=function(req, res){
+     req.flash("success", "logged in successfully");
+     return res.redirect("/");
+     }
+
+
+  
+  module.exports.destroySession = function(req, res){
+     req.logout(function(err) {
+        if (err) { console.log(err); return ; }
+  
+        req.flash("success", "You have successfully Logged out");
+        res.redirect('/');
+      });
+     }
