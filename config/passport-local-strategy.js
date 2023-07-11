@@ -6,19 +6,20 @@ const User = require('../models/user');
 
 // // authentication using passport
 passport.use(new LocalStrategy({
-    usernameField:'email'            // we going this email as username and it is unique
+    usernameField:'email',            // we going this email as username and it is unique
+    passReqToCallback:true
 },
     // call back function
-function(email,password,done){      // here "done" is a function which telss that auth is done or not it may take two arguments
+function(req,email,password,done){      // here "done" is a function which telss that auth is done or not it may take two arguments
     // find a user and will established an identity
     User.findOne({email:email},function (err,user){                // email(schema Vlaue) : email(Passed value)
         if(err){
-            console.log("Error in finding user -----> passport");
+            req.flash('error',err);
             return done(err);                                     // this will report error
         }
 
         if(!user || user.password != password){
-            console.log("Invalid Username/Password");
+            req.flash('error','Invalid Username/Password');
             return done(null, false);                   //false shows that authentication is not done
         }
         return done(null,user);

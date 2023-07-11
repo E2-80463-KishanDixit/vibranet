@@ -14,11 +14,12 @@ module.exports.create =async function(req,res){
             // will handle error 
             post.comments.push(comment);
             post.save();                   // have to call this every time whenever we update DB
+            req.flash('success',"Comment created successfully!!");
             res.redirect('/');
         }
     }catch(err){
-        console.log("Error",err);
-        return;
+        req.flash('error',err);
+        return res.redirect('back');
     }
 }
 
@@ -30,14 +31,15 @@ module.exports.destroy =async function(req,res){
             // store post id 
             let postId = comment.post;
             comment.remove();
-    
+            req.flash('success',"Comment deleted successfully");
             let post =  Post.findByIdAndUpdate({postId},{$pull: {comments:req.params.id}});
             return res.redirect('back');
         }else{
+            req.flash('error',"You can't delete this Comment");
             return res.redirect('back');
         }
     }catch(err){
-        console.log("Error",err);
-        return;
+        req.flash('error',err);
+        return res.redirect('back');
     }
 }

@@ -14,9 +14,11 @@ module.exports.profile = function(req,res){
 module.exports.update = function(req,res){
      if(req.user.id == req.params.id){
           User.findByIdAndUpdate(req.params.id,req.body, function(err,user){
+               req.flash('success',"Profile Upadated Successfully");
                return res.redirect('back');
           })
      }else{
+          req.flash('error','Profile not updated');
           return res.status(401).send('Unauthorized');
      }
 }
@@ -49,6 +51,7 @@ module.exports.signIn = function(req,res){
 module.exports.create =async function(req,res){
      
      if(req.body.password != req.body.confirm_password){
+          req.flash('error','Password not Matched');
           return res.redirect('back');
      }
 
@@ -57,6 +60,7 @@ module.exports.create =async function(req,res){
           if(!user){
                try{
                     await User.create(req.body);
+                    req.flash('success', 'User Created Scuccessfully');
                     return res.redirect('/users/sign-in');
                }catch(err){
                     console.log("Error in creating the user"); 
@@ -82,7 +86,9 @@ module.exports.create =async function(req,res){
   
   module.exports.destroySession = function(req, res){
      req.logout(function(err) {
-        if (err) { console.log(err); return ; }
+        if (err) {        
+          req.flash('error',err);
+          return res.redirect('back'); }
   
         req.flash("success", "You have successfully Logged out");
         res.redirect('/');
