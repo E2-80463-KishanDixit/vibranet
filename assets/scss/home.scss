@@ -1,0 +1,16 @@
+body{
+    background-color: whitesmoke;
+    #home-container{
+        display: flex;
+        #feed-posts{
+            width: 70%;
+            padding: 10px;
+        }
+    }
+    #user-friends{
+        width: 30%;
+        height: 100%;
+        border-left: 1px solid lightgray;
+        margin: 3rem;
+    }
+}
