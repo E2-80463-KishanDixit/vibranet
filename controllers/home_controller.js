@@ -2,7 +2,7 @@ const Post = require('../models/post');
 const User = require('../models/user');
 
 
-module.exports.home = function(req,res){
+module.exports.home = async function(req,res){
     // Cookie come with browser
     // console.log(req.cookies);
 
@@ -19,24 +19,27 @@ module.exports.home = function(req,res){
     // })
 
     // ----------- POPULATING USER'S ALL INFO --------------
-
-     Post.find({})
-     .populate('user')
-     .populate({
-        path:'comments',
-        populate:{
-            path:'user'
-        }
-     })
-     .exec(function(err,posts){
-        User.find({},function(err,users){
-            return res.render('home',{
-                title: "Vibranet | Home",
-                posts:posts,
-                all_users:users
-            });
-        })
+    try{
+        let posts = await Post.find({})
+        .populate('user')
+        .populate({
+           path:'comments',
+           populate:{
+               path:'user'
+           }
         });
+
+        let users = await User.find({});
+   
+           return res.render('home',{
+               title: "Vibranet | Home",
+               posts:posts,
+               all_users:users
+           });
+    }catch(err){
+        console.log("Error",err);
+        return;
+    }
 }
 
 // module.exports.actionName = function(){  };
