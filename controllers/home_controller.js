@@ -21,6 +21,7 @@ module.exports.home = async function(req,res){
     // ----------- POPULATING USER'S ALL INFO --------------
     try{
         let posts = await Post.find({})
+        .sort('-createdAt')  // to display posts in reverse cronological order or first show most recent post after that accroding to time
         .populate('user')
         .populate({
            path:'comments',
