@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const homeController = require('../controllers/home_controller');
 
-console.log('router is loded');
+// console.log('router is loded');
 
 router.get('/',homeController.home);
 
