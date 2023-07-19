@@ -14,7 +14,6 @@ const sassMiddleware = require('node-sass-middleware');
 const flash = require('connect-flash');
 const customMiddleWare = require('./config/middleware');
 
-
 app.use(sassMiddleware({
     src:'./assets/scss',                 // link to where SCSS file take and compile it into CSS
     dest:'./assets/css',                 // where we put all the css file
@@ -36,6 +35,9 @@ app.use(cookieParser());
 
 //adding static files 
 app.use(express.static('./assets'));
+
+// making the uploads path available to the browser
+app.use('/uploads',express.static(__dirname +'/uploads'));
 
 // using layouts
 app.use(expressLayout);
