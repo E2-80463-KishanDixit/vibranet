@@ -12,7 +12,7 @@ const passportLocal = require('./config/passport-local-strategy')
 const MongoStore = require('connect-mongodb-session')(session);
 const sassMiddleware = require('node-sass-middleware');
 const flash = require('connect-flash');
-const customMiddleWare = require('./config/middleware');
+const customMiddleWare = require('./config/middleware'); 
 
 app.use(sassMiddleware({
     src:'./assets/scss',                 // link to where SCSS file take and compile it into CSS
